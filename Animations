@@ -110,6 +110,13 @@ userInputService.InputBegan:Connect(function(input, gameProcessed)
         mainFrame.Position = lastPosition
         mainFrame.Visible = true
         notification.Visible = false
+
+    elseif input.KeyCode == Enum.KeyCode.Tab and minimized == false then
+        minimized = True
+        mainFrame.Position = lastPosition
+        mainFrame.Visible = false
+        notification.Visible = true
+    end
     end
 end)
 
