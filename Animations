@@ -112,7 +112,7 @@ userInputService.InputBegan:Connect(function(input, gameProcessed)
         notification.Visible = false
 
     elseif input.KeyCode == Enum.KeyCode.Tab and minimized == false then
-        minimized = True
+        minimized = true
         mainFrame.Position = lastPosition
         mainFrame.Visible = false
         notification.Visible = true
