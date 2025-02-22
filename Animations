@@ -225,3 +225,19 @@ userInputService.InputBegan:Connect(function(input, gameProcessed)
         animationTracks[keyBinds[key]]:Play()
     end
 end)
+
+local function stopAllAnimations()
+    for _, track in pairs(animationTracks) do
+        if track.IsPlaying then
+            track:Stop()
+        end
+    end
+end
+
+userInputService.InputBegan:Connect(function(input, gameProcessed)
+    if gameProcessed then return end
+    if input.KeyCode == Enum.KeyCode.Backspace then
+        stopAllAnimations()
+    end
+end)
+
