@@ -15,17 +15,39 @@ if not animator then
     animator = Instance.new("Animator")
     animator.Parent = humanoid
 end
-
--- Load animations from ReplicatedStorage
 local function findAnimations()
     local animations = {}
-    for _, child in replicatedStorage.Assets.Animations_R15:GetChildren() do
-        if child:IsA("Animation") then
-            animations[child.Name] = child.AnimationId
+
+    local function searchForAnimations(parent)
+        for _, child in parent:GetChildren() do
+            if child:IsA("Animation") then
+                animations[child.Name] = child.AnimationId
+            elseif child:IsA("Folder") or child:IsA("Model") then
+                searchForAnimations(child) -- Recursively search inside folders and models
+            end
         end
     end
+
+    -- Check common locations where animations might be stored
+    local locationsToCheck = {
+        game.ReplicatedStorage,
+        game.Workspace,
+        game.StarterPlayer,
+        game.StarterPack,
+        game.StarterGui,
+        game.ServerStorage,
+        game.ServerScriptService
+    }
+
+    for _, location in ipairs(locationsToCheck) do
+        if location then
+            searchForAnimations(location)
+        end
+    end
+
     return animations
 end
+
 
 -- Store animations & key binds
 local animations = findAnimations()
