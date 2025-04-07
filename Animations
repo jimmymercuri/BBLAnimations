@@ -31,12 +31,6 @@ local function findAnimations()
     -- Check common locations where animations might be stored
     local locationsToCheck = {
         game.ReplicatedStorage,
-        game.Workspace,
-        game.StarterPlayer,
-        game.StarterPack,
-        game.StarterGui,
-        game.ServerStorage,
-        game.ServerScriptService
     }
 
     for _, location in ipairs(locationsToCheck) do
